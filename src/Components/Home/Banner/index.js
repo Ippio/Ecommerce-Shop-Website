@@ -5,13 +5,16 @@ const Banner = () => {
   return (
     <BannerWrapper>
       <div className="container">
-        <div className="wave">
-          <img src="images/desk-header.png" alt="" />
-        </div>
+        <img
+          className="banner"
+          src="/assets/images/center-image-banner.png"
+          alt=""
+        />
+        <div className="wave"></div>
         <div className="wave wave2"></div>
         <div className="wave wave3"></div>
       </div>
-    </BannerWrapper> 
+    </BannerWrapper>
   );
 };
 

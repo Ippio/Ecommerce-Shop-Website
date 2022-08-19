@@ -8,89 +8,91 @@ const SliderContent = () => {
   const listData = [
     {
       id: uuidv4(),
-      image: "/assets/images/image1.png",
+      image: "/assets/images/slider-image1.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image2.png",
+      image: "assets/images/slider-image2.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image3.png",
+      image: "assets/images/slider-image3.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image4.png",
+      image: "assets/images/slider-image4.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image5.png",
+      image: "assets/images/slider-image5.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image6.png",
+      image: "assets/images/slider-image6.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image7.png",
+      image: "assets/images/slider-image7.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/image8.png",
-    },
-    {
-      id: uuidv4(),
-      image: "assets/images/image9.png",
-    },
+      image: "assets/images/slider-image8.png"
+    }
   ];
   const listTop = [
     {
       id: uuidv4(),
-      image: "assets/images/top1.png",
+      image: "assets/images/botbot1.png"
     },
     {
       id: uuidv4(),
-      image: "assets/images/top2.png",
-    },
+      image: "assets/images/top2.png"
+    }
   ];
   const listBot = [
     {
       id: uuidv4(),
       image: "assets/images/bot1.png",
-      title: "Nhận ngay vourcher 50000đ",
+      title: "Nhận ngay vourcher 50.000 VND"
     },
     {
       id: uuidv4(),
       image: "assets/images/bot2.png",
-      title: "Xiaomi 11T Pro  ưu đãi ngay 3.000.000đ",
-    },
+      title: "Xiaomi 11T Pro  ưu đãi ngay 3.000.000 VND"
+    }
   ];
   return (
     <SliderContentWrapper>
-      <div className="wrapper">
-        <div className="content-left">
-          <Slider listData={listData} isInfinity={true} />
+      <div className="content-left">
+        <Slider listData={listData} isInfinity={true} />
+      </div>
+      <div className="content-right">
+        <div className="content-top">
+          {listTop.map((item) => {
+            return (
+              <div key={item.id} className="">
+                <img src={item.image} alt="" />
+              </div>
+            );
+          })}
         </div>
-        <div className="content-right">
-          <div className="content-top">
-            {listTop.map((item) => {
-              return <img src={item.image} alt="" />;
-            })}
+        <div className="content-bottom">
+          <div className="content-title">
+            <span className="hehe">
+              <a href="#sale">Thông tin nổi bật</a>
+            </span>
+            <span className="hove">
+              <Link to="/product">Xem tất cả</Link>
+            </span>
           </div>
-          <div className="content-bottom">
-            <div className="content-title">
-              <span className="hehe">Thông tin nổi bật</span>
-              <span className="hove"><Link to="/product">Xem tất cả</Link></span>
-            </div>
-            {listBot.map((item) => {
-              return (
-                <div className="content-image">
-                  <img src={item.image} alt="" />
-                  <span className="title-img">{item.title}</span>
-                </div>
-              );
-            })}
-          </div>
+          {listBot.map((item) => {
+            return (
+              <div key={item.id} className="content-image">
+                <img src={item.image} alt="" />
+                <span className="title-img">{item.title}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </SliderContentWrapper>

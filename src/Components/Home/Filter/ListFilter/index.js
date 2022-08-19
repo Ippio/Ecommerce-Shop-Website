@@ -1,8 +1,8 @@
 import React from "react";
 import FilterItem from "./../FilterItem";
-import {ListFilterWrapper} from './../style';
+import { ListFilterWrapper } from "./../style";
 
-const ListFilter = ({listFilter}) => {
+const ListFilter = ({ listFilter }) => {
   return (
     <ListFilterWrapper className="filters">
       <div className="list-filter">

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const HomeWrapper = styled.div`
-    width: 100%;
-    height: auto;
-`
+  width: 100%;
+  height: auto;
+`;

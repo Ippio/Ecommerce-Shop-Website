@@ -11,7 +11,7 @@ export default styled.div`
   border-radius: 6px;
   border-bottom: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background-image: url('/assets/images/khung-product.png');
+  background-image: url("/assets/images/boder-product.png");
   background-repeat: no-repeat;
   background-position: center top 15px;
   &:hover {
@@ -41,7 +41,7 @@ export default styled.div`
   .content .title {
     font-size: 1.2rem;
     font-weight: bold;
-    font-family: "Helvetica Neue",Helvetica;
+    font-family: "Helvetica Neue", Helvetica;
   }
   .content .cost {
     margin: 20px 0;
@@ -63,7 +63,7 @@ export default styled.div`
     padding: 3px 8px;
     border-radius: 30px;
     margin-bottom: 10px;
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: #fff;
   }
   .list-btn {

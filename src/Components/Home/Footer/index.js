@@ -63,14 +63,26 @@ const Footer = () => {
         </div>
         <div className="right">
           <div className="top">
-            <div className=""><span className="title-f">Tư vấn mua hàng</span>(Miễn phí)</div>
-            <div className=""><span className="title-c">0964480434</span>(Nhánh 1)</div>
-            <div className=""><span className="title-f">Hỗ trợ kĩ thuật</span></div>
-            <span className=""><span className="title-c">0865848241</span>(Nhánh 2)</span>
+            <div className="">
+              <span className="title-f">Tư vấn mua hàng</span>(Miễn phí)
+            </div>
+            <div className="">
+              <span className="title-c">0964480434</span>(Nhánh 1)
+            </div>
+            <div className="">
+              <span className="title-f">Hỗ trợ kĩ thuật</span>
+            </div>
+            <span className="">
+              <span className="title-c">0865848241</span>(Nhánh 2)
+            </span>
           </div>
           <div className="bottom">
-            <div className=""><span className="title-f">Góp ý khiếu nại</span>( 8h00 - 22h00)</div>
-            <div className=""><span className="title-c">0964480434</span></div>
+            <div className="">
+              <span className="title-f">Góp ý khiếu nại</span>( 8h00 - 22h00)
+            </div>
+            <div className="">
+              <span className="title-c">0964480434</span>
+            </div>
           </div>
         </div>
       </div>

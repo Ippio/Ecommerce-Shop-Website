@@ -1,131 +1,128 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FilterProductWrapper } from "./style";
 import { v4 as uuidv4 } from "uuid";
-import ProductItem from './ProductItem'
-import axios from 'axios';
+import ProductItem from "./ProductItem";
+import { getListProduct } from "./../../../services";
+import Loading from './../../Common/Loading'
 
-
-const FilterProduct = ({onAdd}) => {
+const FilterProduct = ({ onAdd }) => {
   const listBrand = [
     {
       id: uuidv4(),
-      title: "Apple"
+      title: "Tất cả"
+    },
+    {
+      id: uuidv4(),
+      title: "iPhone"
     },
     {
       id: uuidv4(),
       title: "Samsung"
-    },
-    {
-      id: uuidv4(),
-      title: "Vivo"
-    },
-    {
-      id: uuidv4(),
-      title: "Xiaomi"
-    },
-    {
-      id: uuidv4(),
-      title: "Masstel"
-    },
-    {
-      id: uuidv4(),
-      title: "Tecno"
-    },
-    {
-      id: uuidv4(),
-      title: "Asus"
-    },
-    {
-      id: uuidv4(),
-      title: "Realme"
-    },
-    {
-      id: uuidv4(),
-      title: "OPPO"
-    },
-    {
-      id: uuidv4(),
-      title: "Nokia"
     }
+    // {
+    //   id: uuidv4(),
+    //   title: "Vivo"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Xiaomi"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Masstel"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Tecno"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Asus"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Realme"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "OPPO"
+    // },
+    // {
+    //   id: uuidv4(),
+    //   title: "Nokia"
+    // }
   ];
   const [listData, setListData] = useState([]);
-  const [checked, setChecked] = useState([]);
+  const [checked, setChecked] = useState("Tất cả");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // const handleClick = (event) => {
-  //   const btnElemt = event.target;
-  //   const nameSize = btnElemt.innerText;
-  //   const newList = listProduct.filter((item) => {
-  //     const {name} = item
-  //     if(name.toUpperCase().includes(nameSize.toUpperCase())) return true
-  //   })
-  //   setListData(newList)
-  // }
-// api
   useEffect(() => {
-    const api = async () => {
-     const listApi = await axios.get("http://localhost:5001/product/type/dien-thoai")
-     return listApi
-    }
-    api().then((res) => {setListData(res.data.data.listProduct)})
-    // fetch("http://localhost:5001/product/type/dien-thoai")
-    // .then ()
-  },[])
-  const handleCheck = (event) => {
-    const valueInput = event.target.value;
-    var updatedList = [...checked];
-    if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
+    const initData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getListProduct();
+        const { data, status } = response;
+        if (status === 200) {
+          setIsLoading(false);
+          setListData(data.data.listProduct);
+        } else {
+          setIsLoading(false);
+        }
+      } catch (error) {
+        setIsLoading(false);
+      }
+    };
+    initData();
+  }, []);
+  if (isLoading) return <Loading />;
+  const dataFilter = () => {
+    let data = [];
+    if (checked === "Tất cả") {
+      data = listData.filter((item) => item?.nameExt.includes(" "));
+      return data;
     } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
+      return (data = listData.filter((item) =>
+        item?.nameExt.includes(checked)
+      ));
     }
-    setChecked(updatedList);
-    const newList = listData.filter((item) => {
-      const { nameExt } = item;
-      if (nameExt.toUpperCase().includes(valueInput.toUpperCase())) return true;
-    });
-    setListData(newList);
   };
-  const checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-      })
-    : "";
+  const filterData = dataFilter();
 
-  var isChecked = (item) =>
-    checked.includes(item) ? "checked-item" : "not-checked-item";
   return (
     <FilterProductWrapper>
-        <div className="list-filter">
-          <div className="filter">
-            {listBrand.map((item, index) => {
-              return (
-                <div className="filter-item" key={index}>
-                  <label for="checkbox">
-                    <input
-                      value={item.title}
-                      autoFocus={true}
-                      type="checkbox"
-                      id="checkbox"
-                      onChange={handleCheck}
-                    />
-                  </label>
-                  <span className={isChecked(item.title)}>{item.title}</span>
-                </div>
-              );
-            })}
-          </div>
+      <div className="list-filter">
+      <div className="brand">Hãng sản xuất </div>
+        <div className="filter">
+          {listBrand.map((item, index) => {
+            return (
+              <div className="filter-item" key={index}>
+                <label htmlFor="checkbox">
+                  <input
+                    value={item.title}
+                    autoFocus={true}
+                    type="checkbox"
+                    id="checkbox"
+                    checked={item.title === checked}
+                    onChange={(e) => {
+                      setChecked(e.target.value);
+                      // handleChange()
+                    }}
+                  />
+                </label>
+                <span>{item.title}</span>
+              </div>
+            );
+          })}
         </div>
-        <div className="category">
-          <div className="">Lọc theo sản phẩm : lap ...</div>
-          <div className="check-category">{`Lọc sản phẩm theo: ${checkedItems}`}</div>
-          <div className="list-product">
-              {listData.map((item) => {
-                return (
-                  <ProductItem key={item._id} onAdd={onAdd} product={item}/>
-                );
-              })}
-          </div>
+      </div>
+      <div className="category">
+        <div className="check-category">{`Lọc sản phẩm theo: ${checked}`}</div>
+        <div className="list-product">
+          {filterData?.map((item) => {
+            return <ProductItem listData={item} key={item._id} onAdd={onAdd} />;
+          })}
         </div>
+      </div>
     </FilterProductWrapper>
   );
 };

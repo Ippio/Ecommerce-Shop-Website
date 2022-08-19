@@ -4,10 +4,11 @@ import { TabItemWrapper } from "./style";
 const TabItem = ({ listTab, children, currentIndexActive, onChangeTab }) => {
   return (
     <TabItemWrapper>
-      <ul className="list-tab">
+      <ul id="sale" className="list-tab">
         {listTab.map((item, index) => {
           return (
             <li
+              key={index}
               className={`tab-item ${
                 currentIndexActive === index ? "active" : ""
               }`}

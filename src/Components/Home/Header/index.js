@@ -9,12 +9,11 @@ import {
   faMagnifyingGlass
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-const Header = ({cartItems}) => {
+const Header = ({ setInputValue }) => {
   const [formData, setFormData] = useState({
-    nameproduct: '',
-  }
-  );
-  const [key,setKey] = useState("");
+    nameproduct: ""
+  });
+  const [key, setKey] = useState("");
   const handleChange = (event) => {
     const { name, value } = event.target;
     setKey(value);
@@ -22,6 +21,7 @@ const Header = ({cartItems}) => {
       ...formData,
       [name]: value
     });
+    // setInputValue(value);
   };
   return (
     <HeaderWrapper>
@@ -29,17 +29,24 @@ const Header = ({cartItems}) => {
         <Link to="/">
           <img className="logo" src="/assets/images/logolaptop.png" alt="" />
         </Link>
-        <Input
-          className="input-search"
-          label=""
-          placeholder="Tìm kiếm sản phẩm"
-          autoFocus={true}
-          type="text"
-          name="nameproduct"
-          value={formData.nameproduct}
-          onChange={handleChange}
-        />
-        <Link to={`/search/${key}`}><button class="btn-search"><FontAwesomeIcon icon={faMagnifyingGlass}/></button></Link>
+
+          <div className="input-header">
+            <Input
+              className="input-search"
+              label=""
+              placeholder="Nhập tên laptop, điện thoại,... cần tìm"
+              autoFocus={true}
+              type="text"
+              name="nameproduct"
+              value={formData.nameproduct}
+              onChange={handleChange}
+            />
+          </div>
+          <Link to={`/search/${key}`}>
+            <button className="btn-search">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </Link>
       </div>
       <div className="header-right">
         <ul className="">
@@ -48,16 +55,17 @@ const Header = ({cartItems}) => {
             Thông tin
           </li>
           <li>
-            <FontAwesomeIcon icon={faFileInvoice} />
-            Thanh toán & tiện ích
+            <Link to="/pay">
+              <FontAwesomeIcon icon={faFileInvoice} />
+              Thanh toán & tiện ích
+            </Link>
           </li>
-          <Link className="cart-icon"to="/cart">
-            <li>
+          <li>
+            <Link className="cart-icon" to="/cart">
               <FontAwesomeIcon icon={faCartShopping} />
               Giỏ hàng
-            </li>
-            
-          </Link>
+            </Link>
+          </li>
         </ul>
       </div>
     </HeaderWrapper>

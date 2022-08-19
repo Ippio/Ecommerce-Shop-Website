@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "./../../../contants";
 
 export const SliderContentWrapper = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -8,13 +9,48 @@ export const SliderContentWrapper = styled.div`
   position: relative;
   background-color: #fff;
   z-index: 10000;
-  .wrapper {
-    display: flex;
-  }
+  display: flex;
+  @media ${device.laptop} {
+      margin: -150px 50px 100px 50px;
+    }
+    @media ${device.tablet} {
+      margin: -150px 50px 100px 50px;
+    }
+    @media ${device.mobile} {
+      margin: -150px 30px 100px 30px;
+    }
+    @media ${device.mobileL} {
+      margin: -150px 15px 100px 15px;
+    }
+    @media ${device.mobileM} {
+      margin: -150px 15px 100px 15px;
+    }
+    @media ${device.mobileS} {
+      margin: -150px 15px 100px 15px;
+    }
   .content-left {
+
   }
   .content-right {
     padding-left: 15px;
+    @media ${device.laptop} {
+      display: none;
+    }
+    @media ${device.tablet} {
+      display: none;
+    }
+    @media ${device.mobile} {
+      display: none;
+    }
+    @media ${device.mobileL} {
+      display: none;
+    }
+    @media ${device.mobileM} {
+      display: none;
+    }
+    @media ${device.mobileS} {
+      display: none;
+    }
   }
   .content-top {
     padding-bottom: 10px;
@@ -57,6 +93,7 @@ export const SliderContentWrapper = styled.div`
   }
   .content-image .title-img {
     padding-left: 5px;
+    font-size: 15px;
   }
   //content
   .hehe {
@@ -64,6 +101,9 @@ export const SliderContentWrapper = styled.div`
     font-size: 16px;
     color: #666;
     transition: 0.5s;
+  }
+  .hehe a {
+    text-decoration: none;
   }
   .hehe::before {
     content: "";

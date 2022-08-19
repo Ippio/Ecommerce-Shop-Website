@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { device } from "./../../../contants";
 
 export const ProductsWrapper = styled.div`
   width: 100%;
   margin-top: 20px;
-  background-color: #fff;
 `;
 
 export const PhoneProductWrapper = styled.div`
@@ -11,6 +11,24 @@ export const PhoneProductWrapper = styled.div`
   border-radius: 5px;
   margin-bottom: 40px;
   border: 1px solid #ccc;
+  @media ${device.laptop} {
+    margin: 0 50px;
+  }
+  @media ${device.tablet} {
+    margin: 0 50px;
+  }
+  @media ${device.mobile} {
+    margin: 0 30px;
+  }
+  @media ${device.mobileL} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileM} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileS} {
+    margin: 0 15px;
+  }
   .list-product {
     display: flex;
     flex-wrap: wrap;
@@ -26,50 +44,38 @@ export const PhoneProductWrapper = styled.div`
     font-size: 26px;
     font-weight: bold;
     margin-left: 15px;
+    .title h3 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 15px;
+    @media ${device.laptop} {
+    font-size: 20px;
+    }
+    @media ${device.tablet} {
+      font-size: 20px;
+    }
+    @media ${device.mobile} {
+      font-size: 16px;
+    }
+    @media ${device.mobileL} {
+      font-size: 16px;
+    }
+    @media ${device.mobileM} {
+      font-size: 16px;
+    }
+    @media ${device.mobileS} {
+      font-size: 16px;
+    }
   }
-  /* a {
-  background-image: linear-gradient(
-    to right,
-    #54b3d6,
-    #54b3d6 50%,
-    #000 50%
-  );
-  background-size: 200% 100%;
-  background-position: -100%;
-  display: inline-block;
-  position: relative;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease-in-out;
-}
-
-a:before{
-  content: '';
-  background: #54b3d6;
-  display: block;
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  transition: all 0.3s ;
-}
-
-a:hover {
- background-position: 0;
-}
-
-a:hover::before{
-  width: 100%;
-} */
-  a {
+  }
+  .title span a {
     color: #0168fa;
     text-decoration: none;
     background-color: transparent;
     position: relative;
     cursor: pointer;
   }
-  a:before {
+  .title span a:before {
     content: " ";
     position: absolute;
     left: 0;
@@ -80,19 +86,40 @@ a:hover::before{
     transform: scale(0);
     transition: transform 0.5s ease;
   }
-  a:hover {
+  .title span a:hover {
     text-decoration: none;
     outline: none;
     color: #000;
   }
-  a:hover:before {
+  .title span a:hover:before {
     transform: scale(1);
+  }
+  a {
+    text-decoration: none;
   }
 `;
 export const LaptopProductWrapper = styled.div`
   margin: 0 100px 40px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  @media ${device.laptop} {
+    margin: 0 50px;
+  }
+  @media ${device.tablet} {
+    margin: 0 50px;
+  }
+  @media ${device.mobile} {
+    margin: 0 30px;
+  }
+  @media ${device.mobileL} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileM} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileS} {
+    margin: 0 15px;
+  }
   .list-product {
     display: flex;
     flex-wrap: wrap;
@@ -108,15 +135,33 @@ export const LaptopProductWrapper = styled.div`
     font-size: 26px;
     font-weight: bold;
     margin-left: 15px;
+    @media ${device.laptop} {
+    font-size: 20px;
+    }
+    @media ${device.tablet} {
+      font-size: 20px;
+    }
+    @media ${device.mobile} {
+      font-size: 16px;
+    }
+    @media ${device.mobileL} {
+      font-size: 16px;
+    }
+    @media ${device.mobileM} {
+      font-size: 16px;
+    }
+    @media ${device.mobileS} {
+      font-size: 16px;
+    }
   }
-  a {
+  .title span a {
     color: #0168fa;
     text-decoration: none;
     background-color: transparent;
     position: relative;
     cursor: pointer;
   }
-  a:before {
+  .title span a:before {
     content: " ";
     position: absolute;
     left: 0;
@@ -127,19 +172,40 @@ export const LaptopProductWrapper = styled.div`
     transform: scale(0);
     transition: transform 0.5s ease;
   }
-  a:hover {
+  .title span a:hover {
     text-decoration: none;
     outline: none;
     color: #000;
   }
-  a:hover:before {
+  .title span a:hover:before {
     transform: scale(1);
+  }
+  a {
+    text-decoration: none;
   }
 `;
 export const TabletProductWrapper = styled.div`
   margin: 0 100px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  @media ${device.laptop} {
+    margin: 0 50px;
+  }
+  @media ${device.tablet} {
+    margin: 0 50px;
+  }
+  @media ${device.mobile} {
+    margin: 0 30px;
+  }
+  @media ${device.mobileL} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileM} {
+    margin: 0 15px;
+  }
+  @media ${device.mobileS} {
+    margin: 0 15px;
+  }
   .list-product {
     display: flex;
     flex-wrap: wrap;
@@ -155,15 +221,33 @@ export const TabletProductWrapper = styled.div`
     font-size: 26px;
     font-weight: bold;
     margin-left: 15px;
+    @media ${device.laptop} {
+    font-size: 20px;
+    }
+    @media ${device.tablet} {
+      font-size: 20px;
+    }
+    @media ${device.mobile} {
+      font-size: 16px;
+    }
+    @media ${device.mobileL} {
+      font-size: 16px;
+    }
+    @media ${device.mobileM} {
+      font-size: 16px;
+    }
+    @media ${device.mobileS} {
+      font-size: 16px;
+    }
   }
-  a {
+  .title span a {
     color: #0168fa;
     text-decoration: none;
     background-color: transparent;
     position: relative;
     cursor: pointer;
   }
-  a:before {
+  .title span a:before {
     content: " ";
     position: absolute;
     left: 0;
@@ -174,13 +258,16 @@ export const TabletProductWrapper = styled.div`
     transform: scale(0);
     transition: transform 0.5s ease;
   }
-  a:hover {
+  .title span a:hover {
     text-decoration: none;
     outline: none;
     color: #000;
   }
-  a:hover:before {
+  .title span a:hover:before {
     transform: scale(1);
+  }
+  a {
+    text-decoration: none;
   }
 `;
 export const ProductWrapper = styled.div`
@@ -192,9 +279,27 @@ export const ProductWrapper = styled.div`
   flex-direction: column;
   padding: 15px;
   border-radius: 6px;
-  background-image: url("/assets/images/khung-product.png");
+  background-image: url("/assets/images/boder-product.png");
   background-repeat: no-repeat;
   background-position: center top 15px;
+  @media ${device.laptop} {
+    width: calc((100% - 45px) / 2);
+    }
+    @media ${device.tablet} {
+      width: calc((100% - 45px) / 2);
+    }
+    @media ${device.mobile} {
+      width: calc((100% - 45px) / 2);
+    }
+    @media ${device.mobileL} {
+      width: 100%;
+    }
+    @media ${device.mobileM} {
+      width: 100%;
+    }
+    @media ${device.mobileS} {
+      width: 100%;
+    }
   &:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
@@ -215,13 +320,34 @@ export const ProductWrapper = styled.div`
   .content {
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa;
     border-radius: 10px;
   }
   .content .title {
     font-size: 1.2rem;
     font-weight: bold;
+    text-decoration: none;
     font-family: "Helvetica Neue", Helvetica;
+    @media ${device.laptop} {
+    margin-left: 25px;
+    }
+    @media ${device.tablet} {
+      margin-left: 25px;
+    }
+    @media ${device.mobile} {
+      margin-left: 40px;
+    }
+    @media ${device.mobileL} {
+      margin-left: 40px;
+    }
+    @media ${device.mobileM} {
+      margin-left: 40px;
+    }
+    @media ${device.mobileS} {
+      margin-left: 40px;
+    }
+  }
+  .content .title:hover {
+    color: #cd1916;
   }
   .content .cost {
     margin: 20px 0;
@@ -268,5 +394,7 @@ export const ProductWrapper = styled.div`
   .cart .icon {
     margin-right: 10px;
   }
+  .content a {
+    text-decoration: none;
+  }
 `;
-

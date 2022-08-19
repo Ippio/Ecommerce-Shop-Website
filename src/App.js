@@ -4,34 +4,48 @@ import Category from "./Components/Category";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./Components/Cart";
 import React, { useState } from "react";
-import Detail from './Components/Detail'
-import Search from "./Components/Search"
-
+import Detail from "./Components/Detail";
+import Search from "./Components/Search";
+import Pay from './Components/Pay';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+
   const onAdd = (product) => {
-    const exist = cartItems.find((item) => item.id === product.id);
+    const exist = cartItems?.find((item) => item._id === product._id);
     if (exist) {
-      alert("Thêm sản phẩm vào giỏ hàng thành công <3");
+      // alert("Thêm sản phẩm vào giỏ hàng thành công <3");
       setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
+        cartItems.map((x) => {
+          return x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x;
+        })
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      setCartItems([
+        ...cartItems,
+        { ...product, price: product.listProductGroupDetail[0].price, qty: 1 }
+      ]);
     }
   };
   const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
         )
+      );
+    }
+  };
+  const onRemoveAll = (product) => {
+    const exist = cartItems.find((x) => x._id === product._id);
+    if (exist.qty >= 1) {
+      setCartItems(cartItems.filter((x) => x._id !== product._id));
+    } else {
+      setCartItems(
+        cartItems.map((x) => (x._id === product._id ? { ...exist } : x))
       );
     }
   };
@@ -39,16 +53,25 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home cartItems = {cartItems} />} />
-          <Route path="/product" element={<Category onAdd={onAdd} />} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/product"
+            element={<Category onAdd={onAdd} onRemove={onRemove} />}
+          />
           <Route
             path="/cart"
             element={
-              <Cart cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+              <Cart
+                cartItems={cartItems}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                onRemoveAll={onRemoveAll}
+              />
             }
           />
-          <Route path="/product/:productId" element={<Detail/>}/>
-          <Route path="/search/:key" element={<Search onAdd={onAdd}/>} />
+          <Route path="/product/:productId" element={<Detail onAdd={onAdd}/>} />
+          <Route path="/search/:key" element={<Search onAdd={onAdd} />} />
+          <Route path="/pay" element={<Pay />} />
         </Routes>
       </BrowserRouter>
     </div>

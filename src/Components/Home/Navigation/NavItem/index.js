@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NavItem = (props) => {
   const { NavItem } = props;
-  const { title, icon, listSubMenu ,listProduct } = NavItem;
+  const { title, icon, listSubMenu, listProduct } = NavItem;
   const {
     titleTop,
     titleBottom,
@@ -15,15 +15,15 @@ const NavItem = (props) => {
     titleCost,
     listCost,
     titleProduct,
-    imageRight,
+    imageRight
   } = listSubMenu;
   return (
     <NavItemWrapper className="ccc">
       <li className="nav-item">
-        <Link to="/product"><a href="#">
+        <Link to="/product">
           {icon}
           {title}
-        </a></Link>
+        </Link>
         <div className="submenu">
           <div className="submenu-content">
             <div className="left">
@@ -62,18 +62,18 @@ const NavItem = (props) => {
             </div>
             <div className="product">
               <h3 className="title-product">{titleProduct}</h3>
-              {listProduct.map(item => {
+              {listProduct.map((item) => {
                 return (
                   <div key={item.id} className="product-item">
-                <div className="product-image">
-                  <img src={item.image} alt="" />
-                </div>
-                <div className="content">
-                  <span className="name-product">{item.title}</span>
-                  <span className="cost-product">{item.cost}</span>
-                </div>
-              </div>
-                )
+                    <div className="product-image">
+                      <img src={item.image} alt="" />
+                    </div>
+                    <div className="content">
+                      <span className="name-product">{item.title}</span>
+                      <span className="cost-product">{item.cost}</span>
+                    </div>
+                  </div>
+                );
               })}
             </div>
             <div className="image">

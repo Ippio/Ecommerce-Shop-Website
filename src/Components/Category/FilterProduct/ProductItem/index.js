@@ -1,52 +1,19 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartPlus,
-  faMicrochip,
-  faMobileButton,
-  faMemory
-} from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios'
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { ProductItemWrapper } from "./../style";
 import { Link } from "react-router-dom";
-import Memory from './Momery'
-import {useFetch} from './api'
+import Memory from "./Memory";
+import Price from "./Price";
 
-const ProductItem = ({ product, onAdd }) => {
+const ProductItem = ({ onAdd, listData }) => {
   const [currentIndexActive, setCurrentIndexActive] = useState(0);
-  const [listTabMemory,setListTabMemory] = useState([]);
-  // useEffect(() => {
-  //   const api = async () => {
-  //    const listApiProduct = await axios.get("http://localhost:5001/product/type/dien-thoai")
-  //    return listApiProduct
-  //   }
-  //   api().then((res) => {
-  //       // setListSearch(res.data.data.listProduct)
-  //       return res.data.data.listProduct
-  //   })
-  //   .then(res => {
-  //     res.map(item => {
-  //       console.log("callapi",item.listProductGroupDetail);
-  //       return item.listProductGroupDetail
-  //     })
-  //   })
-  //   .then(res => {console.log(res)})
-  //   return () => {}
-  // },[])
-  //listApiProduct
-  const {data,loading,error} = useFetch("http://localhost:5001/product/type/dien-thoai")
-  console.log("data",data);
-  console.log("listTabParent",listTabMemory);
-  function format(n, currency) {
-    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + currency;
-  }
+  const image =
+    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
 
-//memory
-
-  const handleChangeTab = (currentIndex) => {
-    setCurrentIndexActive(currentIndex);
+  const handleChangeTab = (index) => {
+    setCurrentIndexActive(index);
   };
-
   const renderTabContent = () => {
     switch (currentIndexActive) {
       case 0:
@@ -55,53 +22,61 @@ const ProductItem = ({ product, onAdd }) => {
           //   listData={listData}
           //   isInfinity={true}
           // />
-          <div>hehe </div>
+          <div>
+            <Price data={listData.listProductGroupDetail[0]} />
+          </div>
         );
       case 1:
         return (
-          <div>haha </div>
-        )
+          <div>
+            <Price data={listData.listProductGroupDetail[1]} />
+          </div>
+        );
       case 2:
         return (
-          <div>hihi </div>
+          <div>
+            <Price data={listData.listProductGroupDetail[2]} />
+          </div>
         );
       case 3:
         return (
-          <div>hoho </div>
-        )
+          <div>
+            <Price data={listData.listProductGroupDetail[3]} />
+          </div>
+        );
       default:
         return "";
     }
   };
+  // console.log("listData",listData);
   return (
     <ProductItemWrapper>
-      <div>
-        <Link className="link" to={`/product/${product._id}`}>
+      <div className="product-wrapper">
+        <Link className="link" to={`/product/${listData._id}`}>
           <div className="image">
-            <img src={product.urlPicture} alt="" />
+            <img src={image.concat(listData.urlPicture)} alt="" />
           </div>
         </Link>
         <div className="content">
-          <Link className="link" to={`/product/${product._id}`}>
-            <span className="title">{product.nameExt}</span>
+          <Link className="link" to={`/product/${listData._id}`}>
+            <span className="title">{listData.nameExt}</span>
           </Link>
+          <Memory
+            listData={listData}
+            currentIndexActive={currentIndexActive}
+            onChangeTab={handleChangeTab}
+          >
+            {renderTabContent()}
+          </Memory>
         </div>
-        <div className="">
-        <Memory
-        listTabMemory={listTabMemory}
-        currentIndexActive={currentIndexActive}
-        onChangeTab={handleChangeTab}
-      >
-        {renderTabContent()}
-      </Memory>
-        </div>
+        <div className=""></div>
         <div className="list-btn">
           <Link to="/cart">
-            <button onClick={() => onAdd(product)} className="buy-now">
+            <button onClick={() => onAdd(listData)} className="buy-now">
               Mua ngay
             </button>
           </Link>
-          <button className="cart" onClick={() => onAdd(product)}>
+          <button className="cart" onClick={() => onAdd(listData)}>
             <FontAwesomeIcon className="icon" icon={faCartPlus} />
             Giỏ hàng
           </button>

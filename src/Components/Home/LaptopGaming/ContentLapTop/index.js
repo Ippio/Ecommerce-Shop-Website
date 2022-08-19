@@ -10,7 +10,7 @@ const ContentLapTop = ({ listProduct }) => {
       <div className="list-product">
         {listProduct.map((item) => {
           return (
-            <div className="product-item">
+            <div key={item.id} className="product-item">
               <div className="image">
                 <img src={item.image} alt="" />
               </div>

@@ -8,7 +8,7 @@ export const BannerWrapper = styled.div`
   width: 100%;
   z-index: 100;
   .container {
-    height: 50vh;
+    height: 60vh;
     background-color: transparent;
   }
   .content {
@@ -81,7 +81,7 @@ export const BannerWrapper = styled.div`
   .wave {
     opacity: 0.6;
     position: absolute;
-    top: 200px;
+    top: 250px;
     left: 50%;
     width: 6000px;
     height: 6000px;
@@ -98,19 +98,27 @@ export const BannerWrapper = styled.div`
   }
   .wave3 {
     animation: wave 20s infinite linear;
-    opacity: 1;
+    opacity: 0.8;
   }
   .wave {
-    background: #fff;
   }
   .container {
     position: relative;
-    background-color: red;
-    background-image: url(/assets/images/desk-header.png);
+    background-image: url(/assets/images/bg-banner-top.png);
     background-repeat: no-repeat;
     background-position: center top;
+    background-size: cover;
     z-index: 9;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
+  .container .banner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   @keyframes hieu_ung_wave {
     from {
       transform: translateY(2rem);
