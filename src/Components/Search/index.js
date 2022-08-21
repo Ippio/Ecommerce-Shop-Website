@@ -16,13 +16,13 @@ const Search = ({ onAdd }) => {
   const { key } = useParams();
   const [inputValue, setInputValue] = useState("");
   // console.log(listData);
-  // console.log("key", key);
+  console.log("key", key);
   // console.log("Inputvalue", inputValue);
   const dataFilter = () => {
     let data = [];
     if (key) {
       data = listData.filter((item) =>
-        item?.nameExt.toLowerCase().includes(key.toLowerCase())
+        item?.name.toLowerCase().includes(key.toLowerCase())
       );
       return data;
     }

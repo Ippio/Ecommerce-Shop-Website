@@ -23,7 +23,7 @@ function App() {
     } else {
       setCartItems([
         ...cartItems,
-        { ...product, price: product.listProductGroupDetail[0].price, qty: 1 }
+        { ...product, price: product.price, qty: 1 }
       ]);
     }
   };
