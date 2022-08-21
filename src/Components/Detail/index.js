@@ -10,6 +10,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Loading from "./../Common/Loading";
 
 const Detail = ({ onAdd }) => {
+  const lorem ='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In ornare quam viverra orci sagittis eu volutpat odio facilisis. Ac turpis egestas maecenas pharetra. Sit amet risus nullam eget felis eget nunc lobortis mattis. Pulvinar sapien et ligula ullamcorper malesuada proin. Eget dolor morbi non arcu'
   const [listData, setListData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
@@ -19,17 +20,17 @@ const Detail = ({ onAdd }) => {
     return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + currency;
   }
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
   useEffect(() => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct();
+        const response = await getListProduct(`http://localhost:5001/product/${productId}`);
         const { data, status } = response;
         // console.log("res", response);
         if (status === 200) {
           setIsLoading(false);
-          setListData(data.data.listProduct);
+          setListData(data.product);
         } else {
           setIsLoading(false);
         }
@@ -41,32 +42,33 @@ const Detail = ({ onAdd }) => {
   }, []);
   if (isLoading) return <Loading />;
   // console.log("listData", listData);
-  const productDetail = listData?.find((item) => {
-    // console.log("porductId",typeof productId);
-    // console.log("itemid",typeof item._id);
-    if (item._id === productId) return true;
-  });
+  // const productDetail = listData?.find((item) => {
+  //   // console.log("porductId",typeof productId);
+  //   // console.log("itemid",typeof item._id);
+  //   if (item._id === productId) return true;
+  // });
   // console.log("productDetail", productDetail);
   //memory
+  console.log(listData)
   return (
     <DetailWrapper>
       <Header />
       <Navigation />
       <div className="detail-wrapper">
         <div className="title-detail-product-length">
-          <h1 className="title-detail">{productDetail?.nameExt}</h1>
+          <h1 className="title-detail">{listData?.name}</h1>
           <span className="length-product">
-            Số sản phẩm đã bán : {productDetail?.totalOrder}
+            Số sản phẩm đã bán : {listData?.totalOrder}
           </span>
         </div>
         <div className="content-detail-product">
           <div className="image-detail-product">
             <div className="image-acc">
-              <img src={image.concat(productDetail?.urlPicture)} alt="" />
+              <img src={image.concat(listData?.urlPicture)} style={{width:'200px'}} alt="" />
             </div>
           </div>
           <div className="information-product-detail">
-            <Tabs
+            {/* <Tabs
               selectedIndex={tabIndex}
               onSelect={(tabIndex) => setTabIndex(tabIndex)}
             >
@@ -96,10 +98,10 @@ const Detail = ({ onAdd }) => {
                   );
                 })}
               </TabList>
-            </Tabs>
-            <span className="description">{productDetail?.description}</span>
+            </Tabs> */}
+            <span className="description">{listData?.description || lorem}</span>
             <div className="list-btn-detail">
-                <button onClick={() => onAdd(productDetail)} className="submit-btn-detail-first">
+                <button onClick={() => onAdd(listData)} className="submit-btn-detail-first">
                   <p className="title-btn-detail">MUA NGAY</p>
                   <p className="content-btn-detail">
                     Giao hàng miễn phí hoặc nhận tại Shop

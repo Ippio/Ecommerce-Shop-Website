@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const getListProduct = async () => {
+const getListProduct = async (api) => {
   try {
-    const response = axios.get("http://localhost:5001/product/type/dien-thoai");
+    const response = axios.get(api);
     return response;
   } catch (err) {}
 };

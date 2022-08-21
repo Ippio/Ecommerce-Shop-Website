@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import ProductItem from "./ProductItem";
 import { getListProduct } from "./../../../services";
 import Loading from './../../Common/Loading'
+import { useParams } from "react-router";
 
 const FilterProduct = ({ onAdd }) => {
   const listBrand = [
@@ -55,13 +56,14 @@ const FilterProduct = ({ onAdd }) => {
   const [listData, setListData] = useState([]);
   const [checked, setChecked] = useState("Tất cả");
   const [isLoading, setIsLoading] = useState(false);
-
+  const {productType} = useParams()
   useEffect(() => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct();
+        const response = await getListProduct(`http://localhost:5001/product/type/${productType}`);
         const { data, status } = response;
+        console.log(data)
         if (status === 200) {
           setIsLoading(false);
           setListData(data.data.listProduct);
@@ -75,18 +77,18 @@ const FilterProduct = ({ onAdd }) => {
     initData();
   }, []);
   if (isLoading) return <Loading />;
-  const dataFilter = () => {
-    let data = [];
-    if (checked === "Tất cả") {
-      data = listData.filter((item) => item?.nameExt.includes(" "));
-      return data;
-    } else {
-      return (data = listData.filter((item) =>
-        item?.nameExt.includes(checked)
-      ));
-    }
-  };
-  const filterData = dataFilter();
+  // const dataFilter = () => {
+  //   let data = [];
+  //   if (checked === "Tất cả") {
+  //     data = listData.filter((item) => item?.nameExt.includes(" "));
+  //     return data;
+  //   } else {
+  //     return (data = listData.filter((item) =>
+  //       item?.nameExt.includes(checked)
+  //     ));
+  //   }
+  // };
+  // const filterData = dataFilter();
 
   return (
     <FilterProductWrapper>
@@ -118,7 +120,7 @@ const FilterProduct = ({ onAdd }) => {
       <div className="category">
         <div className="check-category">{`Lọc sản phẩm theo: ${checked}`}</div>
         <div className="list-product">
-          {filterData?.map((item) => {
+          {listData?.map((item) => {
             return <ProductItem listData={item} key={item._id} onAdd={onAdd} />;
           })}
         </div>

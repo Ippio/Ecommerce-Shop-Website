@@ -13,8 +13,8 @@ const TabletProduct = ({ listProduct }) => {
         </span>
       </div>
       <div className="list-product">
-        {listProduct.slice(16, 20).map((item) => {
-          return <Product key={item._id} product={item} />;
+        {listProduct?.ipad?.map((item) => {
+          return <Product key={item._id} product={item}/>;
         })}
       </div>
     </TabletProductWrapper>

@@ -9,45 +9,45 @@ import Price from "./Price";
 const ProductItem = ({ onAdd, listData }) => {
   const [currentIndexActive, setCurrentIndexActive] = useState(0);
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
 
   const handleChangeTab = (index) => {
     setCurrentIndexActive(index);
   };
-  const renderTabContent = () => {
-    switch (currentIndexActive) {
-      case 0:
-        return (
-          // <SliderProduct
-          //   listData={listData}
-          //   isInfinity={true}
-          // />
-          <div>
-            <Price data={listData.listProductGroupDetail[0]} />
-          </div>
-        );
-      case 1:
-        return (
-          <div>
-            <Price data={listData.listProductGroupDetail[1]} />
-          </div>
-        );
-      case 2:
-        return (
-          <div>
-            <Price data={listData.listProductGroupDetail[2]} />
-          </div>
-        );
-      case 3:
-        return (
-          <div>
-            <Price data={listData.listProductGroupDetail[3]} />
-          </div>
-        );
-      default:
-        return "";
-    }
-  };
+  // const renderTabContent = () => {
+  //   switch (currentIndexActive) {
+  //     case 0:
+  //       return (
+  //         // <SliderProduct
+  //         //   listData={listData}
+  //         //   isInfinity={true}
+  //         // />
+  //         <div>
+  //           <Price data={listData.listProductGroupDetail[0]} />
+  //         </div>
+  //       );
+  //     case 1:
+  //       return (
+  //         <div>
+  //           <Price data={listData.listProductGroupDetail[1]} />
+  //         </div>
+  //       );
+  //     case 2:
+  //       return (
+  //         <div>
+  //           <Price data={listData.listProductGroupDetail[2]} />
+  //         </div>
+  //       );
+  //     case 3:
+  //       return (
+  //         <div>
+  //           <Price data={listData.listProductGroupDetail[3]} />
+  //         </div>
+  //       );
+  //     default:
+  //       return "";
+  //   }
+  // };
   // console.log("listData",listData);
   return (
     <ProductItemWrapper>
@@ -59,15 +59,15 @@ const ProductItem = ({ onAdd, listData }) => {
         </Link>
         <div className="content">
           <Link className="link" to={`/product/${listData._id}`}>
-            <span className="title">{listData.nameExt}</span>
+            <span className="title">{listData.name}</span>
           </Link>
-          <Memory
+          {/* <Memory
             listData={listData}
             currentIndexActive={currentIndexActive}
             onChangeTab={handleChangeTab}
           >
             {renderTabContent()}
-          </Memory>
+          </Memory> */}
         </div>
         <div className=""></div>
         <div className="list-btn">

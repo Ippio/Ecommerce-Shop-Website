@@ -215,12 +215,13 @@ const Products = () => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct();
+        const response = await getListProduct(`http://localhost:5001/home`);
         const { data, status } = response;
         // console.log("res", response);
+        console.log(data)
         if (status === 200) {
           setIsLoading(false);
-          setListProduct(data.data.listProduct);
+          setListProduct(data.products);
         } else {
           setIsLoading(false);
         }
@@ -231,6 +232,7 @@ const Products = () => {
     initData();
   }, []);
   if (isLoading) return <Loading />
+  console.log(listProduct)
   return (
     <ProductsWrapper>
       <PhoneProduct listProduct={listProduct}></PhoneProduct>

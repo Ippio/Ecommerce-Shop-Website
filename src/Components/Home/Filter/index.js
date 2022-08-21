@@ -8,22 +8,26 @@ const Filter = () => {
     {
       id: uuidv4(),
       image: "assets/images/icon-mobile.png",
-      title: "Điện thoại"
+      title: "Điện thoại",
+      nameAscii: 'dien-thoai'
     },
     {
       id: uuidv4(),
       image: "assets/images/icon-laptop.png",
-      title: "Laptop"
+      title: "Laptop",
+      nameAscii: 'may-tinh-xach-tay'
     },
     {
       id: uuidv4(),
       image: "assets/images/icon-pc.png",
-      title: "PC - Lắp ráp"
+      title: "PC - Lắp ráp",
+      nameAscii: 'may-tinh-de-ban'
     },
     {
       id: uuidv4(),
       image: "assets/images/icon-tablet.png",
-      title: "Máy tính bảng"
+      title: "Máy tính bảng",
+      nameAscii: 'may-tinh-bang'
     },
     {
       id: uuidv4(),
@@ -58,7 +62,8 @@ const Filter = () => {
     {
       id: uuidv4(),
       image: "assets/images/icon-screen.png",
-      title: "Màn hình"
+      title: "Màn hình",
+      nameAscii: 'man-hinh'
     },
     {
       id: uuidv4(),

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
   return (
     <ProductWrapper>
       <div>
@@ -15,7 +15,7 @@ const Product = ({ product }) => {
         </Link>
         <div className="content">
           <Link className="link" to={`/product/${product._id}`}>
-            <span className="title">{product.nameExt}</span>
+            <span className="title">{product.name}</span>
           </Link>
         </div>
         <div className="">
