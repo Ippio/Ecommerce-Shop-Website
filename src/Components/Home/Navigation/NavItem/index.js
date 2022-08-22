@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NavItem = (props) => {
   const { NavItem } = props;
-  const { title, icon, listSubMenu, listProduct } = NavItem;
+  const { title, icon, listSubMenu, listProduct, nameAscii } = NavItem;
   const {
     titleTop,
     titleBottom,
@@ -20,10 +20,16 @@ const NavItem = (props) => {
   return (
     <NavItemWrapper className="ccc">
       <li className="nav-item">
-        <Link to="/product">
-          {icon}
-          {title}
-        </Link>
+        {nameAscii ?
+          <Link to={`/${nameAscii}`}>
+            {icon}
+            {title}
+          </Link>
+          : <Link to={`/`}>
+            {icon}
+            {title}
+          </Link>
+        }
         <div className="submenu">
           <div className="submenu-content">
             <div className="left">

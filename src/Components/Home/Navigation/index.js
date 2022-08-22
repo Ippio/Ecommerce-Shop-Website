@@ -24,6 +24,7 @@ const Navigation = () => {
     {
       id: uuidv4(),
       title: "ĐIỆN THOẠI",
+      nameAscii:'dien-thoai',
       icon: <FontAwesomeIcon icon={faMobileScreenButton} />,
       listSubMenu: {
         titleTop: "Hãng sản xuất",
@@ -80,6 +81,7 @@ const Navigation = () => {
     {
       id: uuidv4(),
       title: "LAPTOP",
+      nameAscii:'may-tinh-xach-tay',
       icon: <FontAwesomeIcon icon={faLaptop} />,
       listSubMenu: {
         titleTop: "Hãng sản xuất",
@@ -136,6 +138,7 @@ const Navigation = () => {
     {
       id: uuidv4(),
       title: "IPAD",
+      nameAscii:'may-tinh-bang',
       icon: <FontAwesomeIcon icon={faTabletScreenButton} />,
       listSubMenu: {
         titleTop: "Hãng sản xuất",
@@ -245,6 +248,7 @@ const Navigation = () => {
     {
       id: uuidv4(),
       title: "PC - LINH KIỆN",
+      nameAscii:'may-tinh-de-ban',
       icon: <FontAwesomeIcon icon={faDesktop} />,
       listSubMenu: {
         titleTop: "",

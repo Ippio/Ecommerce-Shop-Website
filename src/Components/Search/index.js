@@ -18,35 +18,35 @@ const Search = ({ onAdd }) => {
   // console.log(listData);
   console.log("key", key);
   // console.log("Inputvalue", inputValue);
-  const dataFilter = () => {
-    let data = [];
-    if (key) {
-      data = listData.filter((item) =>
-        item?.name.toLowerCase().includes(key.toLowerCase())
-      );
-      return data;
-    }
-    // } else {
-    //   return (data = listData.filter((item) =>
-    //     item?.nameExt.toLowerCase().includes(inputValue.toLowerCase())
-    //   ));
-    // }
-  };
-  const filterData = dataFilter();
-  console.log(typeof filterData);
-  if(filterData.length === 0) {
-    console.log(filterData);
-    console.log("123hehehe");
-  }
+  // const dataFilter = () => {
+  //   let data = [];
+  //   if (key) {
+  //     data = listData.filter((item) =>
+  //       item?.name.toLowerCase().includes(key.toLowerCase())
+  //     );
+  //     return data;
+  //   }
+  //   // } else {
+  //   //   return (data = listData.filter((item) =>
+  //   //     item?.nameExt.toLowerCase().includes(inputValue.toLowerCase())
+  //   //   ));
+  //   // }
+  // };
+  // const filterData = dataFilter();
+  // console.log(typeof filterData);
+  // if(filterData.length === 0) {
+  //   console.log(filterData);
+  //   console.log("123hehehe");
+  // }
   useEffect(() => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct();
+        const response = await getListProduct(`http://localhost:5001/product/search/${key}`);
         const { data, status } = response;
         if (status === 200) {
           setIsLoading(false);
-          setListData(data.data.listProduct);
+          setListData(data.products);
         } else {
           setIsLoading(false);
         }
@@ -63,14 +63,14 @@ const Search = ({ onAdd }) => {
       <Header />
       <Navigation />
       <div className="list-search">
-        {filterData.length === 0 ? (
+        {listData.length === 0 ? (
           <div className="search-no-product">
             <img src="/assets/images/khongtimthaysanpham.png" alt="" />
             <span className="title-search">Rất tiếc ! Sorry !</span>
             <span>Không tìm thấy sản phẩm phù hợp với từ khoá : <strong>{key}</strong></span>
           </div>
         ) : (
-          filterData.map((item) => {
+          listData.map((item) => {
             return (
               <ProductItem
                 className="product-item"
