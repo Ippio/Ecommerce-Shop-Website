@@ -17,31 +17,31 @@ function App() {
       // alert("Thêm sản phẩm vào giỏ hàng thành công <3");
       setCartItems(
         cartItems.map((x) => {
-          return x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x;
+          return x._id === product._id ? { ...exist, amount: exist.amount + 1 } : x;
         })
       );
     } else {
       setCartItems([
         ...cartItems,
-        { ...product, price: product.price, qty: 1 }
+        { ...product, price: product.price, amount: 1 }
       ]);
     }
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x._id === product._id);
-    if (exist.qty === 1) {
+    if (exist.amount === 1) {
       setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
+          x._id === product._id ? { ...exist, amount: exist.amount - 1 } : x
         )
       );
     }
   };
   const onRemoveAll = (product) => {
     const exist = cartItems.find((x) => x._id === product._id);
-    if (exist.qty >= 1) {
+    if (exist.amount >= 1) {
       setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(

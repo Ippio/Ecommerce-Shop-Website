@@ -27,10 +27,10 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
   //form input
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phoneNumber: "",
     email: "",
     address: "",
-    textnote: ""
+    textNote: ""
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,20 +40,35 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
     });
   };
   //logic
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const itemsPrice = cartItems.reduce((a, c) => a + c.amount * c.price, 0);
   const priceCart = format(itemsPrice, " VND");
-  const taxPrice = itemsPrice * 0.14;
+  const taxPrice = Math.round(itemsPrice * 0.14);
   const thuePrice = format(taxPrice, " VND");
   const shippingPrice = priceCart > 10000000 ? 50000 : 20000;
   const ship = format(shippingPrice, " VND");
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   const total = format(totalPrice, " VND");
-
+  const orderItems = cartItems.reduce((arr,item)=>{
+    const product={
+      product: item._id,
+      amount: item.amount
+    }
+    arr.push(product)
+    return arr
+  },[])
+  const order = {
+    orderItems: orderItems,
+    subTotal: itemsPrice,
+    tax:taxPrice,
+    shippingFee : shippingPrice,
+    total: totalPrice
+  }
+  console.log(order)
   const handlePay = () => {
     alert("Cảm ơn quý khách đã mua đồ của Shoppp <3");
   };
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
   return (
     <CartWrapper>
       <Header />
@@ -86,7 +101,7 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
                         >
                           <FontAwesomeIcon icon={faMinus} />
                         </button>{" "}
-                        <span className="number">{item.qty}</span>
+                        <span className="number">{item.amount}</span>
                         <button
                           onClick={() => onAdd(item)}
                           className="btn-increment add"
@@ -95,7 +110,7 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
                         </button>
                       </div>
                       <div className="cost-cart text-right">
-                        {item.qty} x {format(item.price, " VND")}
+                        {item.amount} x {format(item.price, " VND")}
                       </div>
                     </div>
                   </div>
@@ -147,21 +162,21 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
                 </p>
               </div>
               <div className="input-form">
-                <Form />
+                <Form order={order}/>
                 {/* <label htmlFor="">Ghi chú :</label>
                 <textarea
                   className="textarea"
                   label=""
                   autoFocus={true}
-                  name="textnote"
-                  value={formData.textnote}
+                  name="textNote"
+                  value={formData.textNote}
                   onChange={handleChange}
                   rows="7"
                   placeholder="Yêu cầu lắp đặt hoặc ghi chú thêm.."
                 ></textarea>
                 <div className="">
-                  Bạn đã nhập <strong>{formData.textnote.length}</strong> kí tự
-                  .Bạn còn <strong>{500 - formData.textnote.length}</strong> kí
+                  Bạn đã nhập <strong>{formData.textNote.length}</strong> kí tự
+                  .Bạn còn <strong>{500 - formData.textNote.length}</strong> kí
                   tự nữa.
                 </div> */}
               </div>

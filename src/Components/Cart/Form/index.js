@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
+import { createOrder } from "../../../services";
 
-function Form() {
+function Form({order}) {
   const {
     register,
     handleSubmit,
@@ -9,8 +10,10 @@ function Form() {
     trigger
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("dataForm====", data);
+  const onSubmit = async(data) => {
+    order = {...order,customerInfo:data}
+    const newOrder = await createOrder(order)
+    console.log(newOrder)
     reset();
   };
 
@@ -74,11 +77,11 @@ function Form() {
               )}
             </div>
             <div className="form-group">
-              <label className="col-form-label">Phone:</label>
+              <label className="col-form-label">Phone Number:</label>
               <input
                 type="text"
-                className={`form-control ${errors.phone && "invalid"}`}
-                {...register("phone", {
+                className={`form-control ${errors.phoneNumber && "invalid"}`}
+                {...register("phoneNumber", {
                   required: "Hãy nhập số điện thoại",
                   pattern: {
                     value:
@@ -87,11 +90,11 @@ function Form() {
                   }
                 })}
                 onKeyUp={() => {
-                  trigger("phone");
+                  trigger("phoneNumber");
                 }}
               />
-              {errors.phone && (
-                <small className="text-danger">{errors.phone.message}</small>
+              {errors.phoneNumber && (
+                <small className="text-danger">{errors.phoneNumber.message}</small>
               )}
             </div>
             <div className="form-group">
@@ -99,9 +102,9 @@ function Form() {
               <textarea
                 rows="7"
                 className={`form-control textarea ${
-                  errors.message && "invalid"
+                  errors.textNote && "invalid"
                 }`}
-                {...register("message", {
+                {...register("textNote", {
                   required: "Hãy nhập ghi chú thêm cho sản phẩm.",
                   minLength: {
                     value: 10,
@@ -113,12 +116,12 @@ function Form() {
                   }
                 })}
                 onKeyUp={() => {
-                  trigger("message");
+                  trigger("textNote");
                 }}
               ></textarea>
               <div className=""></div>
-              {errors.message && (
-                <small className="text-danger">{errors.message.message}</small>
+              {errors.textNote && (
+                <small className="text-danger">{errors.textNote.message}</small>
               )}
             </div>
             </div>

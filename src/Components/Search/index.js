@@ -38,11 +38,12 @@ const Search = ({ onAdd }) => {
   //   console.log(filterData);
   //   console.log("123hehehe");
   // }
+  const api = `http://localhost:5001/product/search/${key}`
   useEffect(() => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct(`http://localhost:5001/product/search/${key}`);
+        const response = await getListProduct(api);
         const { data, status } = response;
         if (status === 200) {
           setIsLoading(false);
@@ -55,7 +56,7 @@ const Search = ({ onAdd }) => {
       }
     };
     initData();
-  }, []);
+  }, [api]);
   // console.log("filterData",filterData);
   if (isLoading) return <Loading />
   return (

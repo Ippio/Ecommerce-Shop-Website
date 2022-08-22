@@ -12,6 +12,14 @@ const getListProductHome = async () => {
     return response;
   } catch (err) {}
 };
+const createOrder = async (order) => {
+  try {
+    const response = axios.post("http://localhost:5001/order",order);
+    return response;
+  } catch (err) {
+
+  }
+};
 
 
-export {getListProduct,getListProductHome}
+export {getListProduct,getListProductHome,createOrder}
