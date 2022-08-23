@@ -11,12 +11,23 @@ function Form({order}) {
   } = useForm();
 
   const onSubmit = async(data) => {
+    console.log("data", data);
     order = {...order,customerInfo:data}
     const newOrder = await createOrder(order)
-    console.log(newOrder)
+    console.log("newODER =====",newOrder)
+    if(newOrder.status === 201) {
+      alert("Bạn đã đặt hàng thành công . Cảm ơn bạn đã tin tưởng shop")
+    }
     reset();
+    
   };
-
+  const handlePay = () => {
+    // alert("Cảm ơn quý khách đã mua đồ của Shoppp <3");
+    // if(order.status === 201) {
+    //   console.log("hehehehehe");
+    // }
+    console.log(order);
+  };
   // console.log(watch());
 
   // console.log(errors.name)
@@ -129,6 +140,7 @@ function Form({order}) {
               type="submit"
               className="btn btn-primary my-3 btn-submit"
               value="Đặt hàng ngay"
+              onClick={handlePay()}
             />
           </form>
         </div>

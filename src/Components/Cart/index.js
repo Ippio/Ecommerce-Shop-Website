@@ -63,10 +63,7 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
     shippingFee : shippingPrice,
     total: totalPrice
   }
-  console.log(order)
-  const handlePay = () => {
-    alert("Cảm ơn quý khách đã mua đồ của Shoppp <3");
-  };
+  console.log("order",order)
   const image =
     "http://localhost:5001/";
   return (
@@ -78,8 +75,8 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
           <div className="no-product">
             <img src="/assets/images/cart-no.png" alt="" />
             <p className="">Không có sản phẩm nào</p>
-            <Link to="/product">
-              <button className="">Tiếp tục mua hàng</button>
+            <Link to="/">
+              <button className="">Quay lại trang chủ</button>
             </Link>
           </div>
         )}
@@ -158,7 +155,7 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
                 </p>
                 <p>
                   Bằng cách đặt hàng, bạn đồng ý với{" "}
-                  <strong>Điều khoản giao dịch</strong> của Tiến Bịp
+                  <strong>Điều khoản giao dịch</strong> của Shop
                 </p>
               </div>
               <div className="input-form">
