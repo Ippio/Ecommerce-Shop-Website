@@ -21,6 +21,7 @@ export const DetailWrapper = styled.div`
   .image-detail-product {
     flex-grow: 1;
     border: 1px solid transparent;
+    margin-top: 30px;
   }
   .image-acc {
     width: 100%;
@@ -31,7 +32,7 @@ export const DetailWrapper = styled.div`
     background-position: center top;
   }
   .image-acc img {
-    margin: 110px auto;
+    margin: 150px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +41,13 @@ export const DetailWrapper = styled.div`
     width: 50%;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+  }
+  .price-detail {
+    font-size: 30px;
+    color: #cd1916;
+    font-weight: bold;
+    margin: 10px 15px;
   }
   .react-tabs__tab-list {
     display: flex;
@@ -66,6 +74,20 @@ export const DetailWrapper = styled.div`
   .tab-item:hover {
     background-color: #edeeef;
     border-radius: 5px;
+  }
+  .all-info {
+    background-color: #cacaca;
+  }
+  .info-detail {
+    margin: 10px 25px;
+  }
+  .title-info {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  .title------ {
+    font-size: 18px;
+    margin-left: 15px;
   }
 
   //actice
@@ -163,6 +185,7 @@ export const DetailWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 50px;
+    margin-left: 15px;
   }
   .list-btn-detail .submit-btn-detail-first {
     padding: 10px 20px;
@@ -229,5 +252,35 @@ export const DetailWrapper = styled.div`
   .list-comment .comment-item p {
     font-size: 15px;
     margin: 10px 0;
+  }
+  .form-upload {
+    border: none;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .form-upload textarea {
+    width: 100%;
+    height: 68px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 8px 123px 8px 8px;
+    background-color: #fff;
+    font-size: 16px;
+    outline: none;
+
+  }
+  .form-upload button{
+    padding: 10px 11px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #cd1916;
+    color: #fff;
   }
 `;

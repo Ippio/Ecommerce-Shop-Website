@@ -6,14 +6,12 @@ import Header from "./../Home/Header";
 import Navigation from "./../Home/Navigation";
 import Footer from "./../Home/Footer";
 import Copyright from "./../Home/Copyright";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Loading from "./../Common/Loading";
 
 const Detail = ({ onAdd }) => {
-  const lorem ='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In ornare quam viverra orci sagittis eu volutpat odio facilisis. Ac turpis egestas maecenas pharetra. Sit amet risus nullam eget felis eget nunc lobortis mattis. Pulvinar sapien et ligula ullamcorper malesuada proin. Eget dolor morbi non arcu'
+  const lorem ='Thông tin đang được cập nhật'
   const [listData, setListData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0);
   const { productId } = useParams();
   // console.log("idpro",productId);
   function format(n, currency) {
@@ -49,7 +47,10 @@ const Detail = ({ onAdd }) => {
   // });
   // console.log("productDetail", productDetail);
   //memory
-  console.log(listData)
+  console.log("lítDtaa",listData)
+  const priceMory = parseInt(listData?.price)
+  const priceHehe = format(priceMory, " VND")
+  console.log(priceHehe);
   return (
     <DetailWrapper>
       <Header />
@@ -99,6 +100,16 @@ const Detail = ({ onAdd }) => {
                 })}
               </TabList>
             </Tabs> */}
+            <div className="price-detail">{priceHehe}</div>
+            <div className="">
+              <div className="title------"></div>
+              {listData?.listAttrDetailShort?.map(item => {
+                return <div key={item._id} className="info-detail">
+                  <span className="title-info">{item?.attributeName} :</span>
+                  <span className="content-info">{item?.value}</span>
+                </div>
+              })}
+            </div>
             <span className="description">{listData?.description || lorem}</span>
             <div className="list-btn-detail">
                 <button onClick={() => onAdd(listData)} className="submit-btn-detail-first">
@@ -122,8 +133,12 @@ const Detail = ({ onAdd }) => {
         </div>
       </div>
       <div className="vote-detail-product">
-        <h4>Đánh giá sản phẩm</h4>
+        <h4>Đánh giá sản phẩm : {listData?.name}</h4>
         <hr></hr>
+        <div className="form-upload">
+          <textarea placeholder="Bạn có khuyên người khác mua sản phẩm không ? Tại sao ?" id="write-comment"></textarea>
+          <button>Gửi đánh giá</button>
+        </div>
         <div className="list-comment">
           <div className="comment-item">
             <img src="/assets/images/ip13promax.jpg" alt=""/>
