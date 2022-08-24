@@ -7,8 +7,9 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const SliderProduct1 = ({ listData }) => {
+  console.log("listSubMenu",listData);
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
   //orr
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -19,7 +20,7 @@ const SliderProduct1 = ({ listData }) => {
   return (
     <SliderProductWrapper>
       <Carousel className="haha" breakPoints={breakPoints}>
-        {listData.map((item) => {
+        {listData?.phone?.map((item) => {
           return (
             <Item key={item._id}>
               <Link to={`/product/${item._id}`}>

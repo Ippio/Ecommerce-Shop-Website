@@ -199,9 +199,11 @@ export const DetailWrapper = styled.div`
     opacity: 0.9;
     cursor: pointer;
   }
-  .title-btn-detail {
+  .title-btn-detail a {
+    text-decoration: none;
     font-size: 20px;
     font-weight: bold;
+    color: #fff;
   }
   .content-btn-detail {
     font-size: 14px;
@@ -283,4 +285,45 @@ export const DetailWrapper = styled.div`
     background-color: #cd1916;
     color: #fff;
   }
+  /* rate star */
+  div.stars {
+  width: 270px;
+  display: inline-block;
+}
+
+input.star {
+  display: none;
+}
+
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 36px;
+  color: #444;
+  transition: all 0.2s;
+}
+
+input.star:checked ~ label.star:before {
+  content: "\f005";
+  color: #fd4;
+  transition: all 0.25s;
+}
+
+input.star-5:checked ~ label.star:before {
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before {
+  color: #f62;
+}
+
+label.star:hover {
+  transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+  content: "\f006";
+  font-family: FontAwesome;
+}
 `;

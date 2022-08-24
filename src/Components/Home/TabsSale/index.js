@@ -5,7 +5,7 @@ import SliderProduct from "./../TabsSale/SliderProduct";
 import SliderProduct1 from "./../TabsSale/SliderProduct1";
 import SliderProduct2 from "./../TabsSale/SliderProduct2";
 import SliderProduct3 from "./../TabsSale/SliderProduct3";
-import { getListProduct } from "./../../../services";
+import { getListProduct ,getListProductHome} from "./../../../services";
 import Loading from './../../Common/Loading'
 
 const TabsSale = () => {
@@ -270,12 +270,12 @@ const TabsSale = () => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        const response = await getListProduct();
+        const response = await getListProductHome();
         const { data, status } = response;
-        // console.log("res", response);
+        console.log("res", response);
         if (status === 200) {
           setIsLoading(false);
-          setListData(data.data.listProduct);
+          setListData(data.products);
         } else {
           setIsLoading(false);
         }

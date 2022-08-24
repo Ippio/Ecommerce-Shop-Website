@@ -222,5 +222,9 @@ export const CartWrapper = styled.div`
   }
   input[type="submit"] {
     font-size: 40px;
+    cursor: pointer;
+  }
+  .btn-submit {
+    cursor: pointer;
   }
 `;

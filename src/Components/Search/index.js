@@ -59,6 +59,7 @@ const Search = ({ onAdd }) => {
   }, [api]);
   // console.log("filterData",filterData);
   if (isLoading) return <Loading />
+  console.log(listData);
   return (
     <SearchWrapper>
       <Header />

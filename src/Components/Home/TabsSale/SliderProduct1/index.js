@@ -7,7 +7,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 const SliderProduct1 = ({ listData }) => {
   const image =
-    "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/";
+    "http://localhost:5001/";
   //orr
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -18,7 +18,7 @@ const SliderProduct1 = ({ listData }) => {
   return (
     <SliderProductWrapper>
       <Carousel className="haha" breakPoints={breakPoints}>
-        {listData.map((item) => {
+        {listData?.phone?.map((item) => {
           return (
             <Item key={item.id}>
               <div className="image">
