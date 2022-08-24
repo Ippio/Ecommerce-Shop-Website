@@ -9,29 +9,53 @@ import Copyright from "./../Home/Copyright";
 import Loading from "./../Common/Loading";
 import { Link } from "react-router-dom";
 import './font-awesome.css'
+import Modal from "./Modal";
 
 const Detail = ({ onAdd }) => {
   const lorem = "Thông tin đang được cập nhật";
   const [listData, setListData] = useState([]);
+  const [listReview, setListReview] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [star, setStar] = useState(null);
+  const [comment, setComment] = useState('');
+  const [refresh, setRefresh] = useState(1);
   const { productId } = useParams();
   // console.log("idpro",productId);
+  const callAPI= (api)=>{
+    const response = getListProduct(api);
+      return response
+  }
   function format(n, currency) {
     return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + currency;
   }
+  const openModal = () => {
+    if (comment && star) setModal(true)
+  }
+  const handleChange = (e) => {
+    const value = e.target.value
+    setComment(value)
+  }
   const image = "http://localhost:5001/";
   useEffect(() => {
-    const initData = async () => {
+    const initData = async() => {
       try {
         setIsLoading(true);
-        const response = await getListProduct(
-          `http://localhost:5001/product/${productId}`
-        );
+        // const response = await getListProduct(
+        //   `http://localhost:5001/product/${productId}`
+        // );
+        const response = await callAPI(`http://localhost:5001/product/${productId}`)
+        const response1 = await callAPI(`http://localhost:5001/review/${productId}`)
         const { data, status } = response;
         // console.log("res", response);
-        if (status === 200) {
+        // const response1 = await getListProduct(
+        //   `http://localhost:5001/review/${productId}`
+        // );
+
+        if (status === 200 && response1) {
           setIsLoading(false);
           setListData(data.product);
+          setListReview(response1.data.listReview)
         } else {
           setIsLoading(false);
         }
@@ -42,6 +66,7 @@ const Detail = ({ onAdd }) => {
     initData();
   }, []);
   if (isLoading) return <Loading />;
+  // console.log(listReview)
   // console.log("listData", listData);
   // const productDetail = listData?.find((item) => {
   //   // console.log("porductId",typeof productId);
@@ -50,10 +75,10 @@ const Detail = ({ onAdd }) => {
   // });
   // console.log("productDetail", productDetail);
   //memory
-  console.log("lítDtaa", listData);
+  // console.log("lítDtaa", listData);
   const priceMory = parseInt(listData?.price);
   const priceHehe = format(priceMory, " VND");
-  console.log(priceHehe);
+  // console.log(priceHehe);
   return (
     <DetailWrapper>
       <Header />
@@ -156,35 +181,29 @@ const Detail = ({ onAdd }) => {
         <h4>Đánh giá sản phẩm : {listData?.name}</h4>
         <hr></hr>
         <div className="form-upload">
-          <textarea
+          <textarea name="comment" value={comment} onChange={(e) => handleChange(e)}
             placeholder="Bạn có khuyên người khác mua sản phẩm không ? Tại sao ?"
             id="write-comment"
           ></textarea>
-          <button>Gửi đánh giá</button>
-          <div class="stars">
+          <button onClick={() => openModal()}>Gửi đánh giá</button>
+          <div className="stars">
             <form action="">
-              <input class="star star-5" id="star-5" type="radio" name="star" />
-              <label class="star star-5" for="star-5"></label>
-              <input class="star star-4" id="star-4" type="radio" name="star" />
-              <label class="star star-4" for="star-4"></label>
-              <input class="star star-3" id="star-3" type="radio" name="star" />
-              <label class="star star-3" for="star-3"></label>
-              <input class="star star-2" id="star-2" type="radio" name="star" />
-              <label class="star star-2" for="star-2"></label>
-              <input class="star star-1" id="star-1" type="radio" name="star" />
-              <label class="star star-1" for="star-1"></label>
+              <input onClick={() => setStar(5)} className="star star-5" id="star-5" type="radio" name="star" />
+              <label className="star star-5" for="star-5"></label>
+              <input onClick={() => setStar(4)} className="star star-4" id="star-4" type="radio" name="star" />
+              <label className="star star-4" for="star-4"></label>
+              <input onClick={() => setStar(3)} className="star star-3" id="star-3" type="radio" name="star" />
+              <label className="star star-3" for="star-3"></label>
+              <input onClick={() => setStar(2)} className="star star-2" id="star-2" type="radio" name="star" />
+              <label className="star star-2" for="star-2"></label>
+              <input onClick={() => setStar(1)} className="star star-1" id="star-1" type="radio" name="star" />
+              <label className="star star-1" for="star-1"></label>
             </form>
           </div>
         </div>
         <div className="list-comment">
-          <div className="comment-item">
-            <img src="/assets/images/ip13promax.jpg" alt="" />
-            <div className="content-comment">
-              <h5>Nameeeee</h5>
-              <p>san pham rat tot hehehehehee</p>
-              <span>4 gio truoc</span>
-            </div>
-          </div>
+          <Review listReview={listReview}></Review>
+          <Modal isShow={modal} close={setModal} star={star} comment={comment} refresh={refresh} setRefresh={setRefresh} productId={productId} />
         </div>
       </div>
       <Footer />
@@ -192,4 +211,21 @@ const Detail = ({ onAdd }) => {
     </DetailWrapper>
   );
 };
+
+const Review = ({listReview}) => {
+  return (
+    listReview.map((item)=>(
+      <div className="comment-item" style={{marginTop:'40px'}}>
+            <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" alt="" />
+            <div className="content-comment">
+              <h5>{item.customer.name}</h5>
+              <p>Số sao: {item.rating}</p>
+              <p>{item.comment}</p>
+              {/* <span>{'4 gio truoc'}</span> */}
+            </div>
+          </div>
+    ))
+  )
+}
+
 export default Detail;
