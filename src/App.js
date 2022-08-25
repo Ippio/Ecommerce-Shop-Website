@@ -15,9 +15,10 @@ function App() {
     const exist = cartItems?.find((item) => item._id === product._id);
     if (exist) {
       // alert("Thêm sản phẩm vào giỏ hàng thành công <3");
-      setCartItems(
+
+        setCartItems(
         cartItems.map((x) => {
-          return x._id === product._id ? { ...exist, amount: exist.amount + 1 } : x;
+          return (x._id === product._id && product.amount < product.quantity) ? { ...exist, amount: exist.amount + 1 } : x;
         })
       );
     } else {

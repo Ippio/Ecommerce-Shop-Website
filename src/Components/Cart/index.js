@@ -63,7 +63,6 @@ const Cart = ({ cartItems, onAdd, onRemove, onRemoveAll }) => {
     shippingFee : shippingPrice,
     total: totalPrice
   }
-  console.log("order",order)
   const image =
     "http://localhost:5001/";
   return (

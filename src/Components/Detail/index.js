@@ -67,7 +67,7 @@ const Detail = ({ onAdd }) => {
   }, []);
   if (isLoading) return <Loading />;
   // console.log(listReview)
-  // console.log("listData", listData);
+  console.log("listData", listData);
   // const productDetail = listData?.find((item) => {
   //   // console.log("porductId",typeof productId);
   //   // console.log("itemid",typeof item._id);

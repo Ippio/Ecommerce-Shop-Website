@@ -47,10 +47,49 @@ export const FilterProductWrapper = styled.div`
     font-weight: bold;
     margin: 20px 10px;
   }
+  .list-product-page {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .list-product {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+  }
+  .page {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 0 10px;
+  }
+  .active-pagination {
+    background-color: red;
+  }
+  .btn-prev {
+    cursor: pointer;
+    padding: 8px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: none;
+  }
+  .btn-next {
+    cursor: pointer;
+    padding: 8px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export const ProductItemWrapper = styled.div`
