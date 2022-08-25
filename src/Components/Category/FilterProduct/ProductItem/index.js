@@ -50,6 +50,7 @@ const ProductItem = ({ onAdd, listData }) => {
   // };
   // console.log("listData",listData);
   return (
+    listData.quantity > 0 &&
     <ProductItemWrapper>
       <div className="product-wrapper">
         <Link className="link" to={`/product/${listData._id}`}>
