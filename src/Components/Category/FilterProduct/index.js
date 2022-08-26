@@ -8,8 +8,9 @@ import removeVietnameseTones from "../../../utils/CharAsciiConvert";
 import { range } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleLeft,faAngleRight
+  faAngleLeft, faAngleRight
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const ProductType = [
   {
@@ -271,7 +272,8 @@ const FilterProduct = ({ onAdd }) => {
   const [listData, setListData] = useState([]);
   const [checked, setChecked] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [totalPage, setTotalPage] = useState(null);
   const { productType } = useParams();
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop)
@@ -281,7 +283,8 @@ const FilterProduct = ({ onAdd }) => {
     return arr;
   }, []);
   const queryObject = {
-    brand: params.brand || brand.toString()
+    brand: params.brand || brand.toString(),
+    page: params.page || currentIndex
   };
   const type = ProductType.filter((obj) => {
     if (obj.nameAscii === productType) return obj;
@@ -293,13 +296,13 @@ const FilterProduct = ({ onAdd }) => {
     const initData = async () => {
       try {
         setIsLoading(true);
-        setCurrentIndex(0)
         const response = await getListProduct(api);
         const { data, status } = response;
-        console.log(data);
+        // console.log(data);
         if (status === 200) {
           setIsLoading(false);
           setListData(data.data.listProduct);
+          setTotalPage(Math.ceil(data.data.totalProduct / 12));
         } else {
           setIsLoading(false);
         }
@@ -310,18 +313,7 @@ const FilterProduct = ({ onAdd }) => {
     initData();
   }, [api]);
   if (isLoading) return <Loading />;
-  // const dataFilter = () => {
-  //   let data = [];
-  //   if (checked === "Tất cả") {
-  //     data = listData.filter((item) => item?.nameExt.includes(" "));
-  //     return data;
-  //   } else {
-  //     return (data = listData.filter((item) =>
-  //       item?.nameExt.includes(checked)
-  //     ));
-  //   }
-  // };
-  // const filterData = dataFilter();
+
   const handleChange = (e) => {
     const value = e.target.value;
     if (value === "Tất cả") setChecked([]);
@@ -339,34 +331,32 @@ const FilterProduct = ({ onAdd }) => {
     }
   };
   //pagination
-  const limit = 9;
-  const totalPage = Math.ceil(listData.length / limit);
   // console.log("totalpgae",totalPage);
   const handleChangeIndex = (index) => {
-    setCurrentIndex(index);
+    setCurrentIndex(index + 1);
   };
   // if (!listCountry.length) return null;
   //btn 
   const handlePrev = () => {
-    console.log("hehehe");
-      // prev vo han
-      if(currentIndex === 0){
-        setCurrentIndex(currentIndex);
-      }else {
-        setCurrentIndex(currentIndex - 1);
-      }
+    // console.log("hehehe");
+    // prev vo han
+    if (currentIndex === 1) {
+      setCurrentIndex(currentIndex);
+    } else {
+      setCurrentIndex(currentIndex - 1);
+    }
   }
   const handleNext = () => {
+    // next vo han
+    // console.log("curentIndex", currentIndex);
+    // console.log("totalpgae", totalPage);
+    if (currentIndex === totalPage - 1) {
       // next vo han
-      console.log("curentIndex",currentIndex);
-      console.log("totalpgae",totalPage);
-      if (currentIndex === totalPage - 1) {
-        // next vo han
-        // console.log("hahahahhahha");
-        setCurrentIndex(currentIndex);
-      } else {
-        setCurrentIndex(currentIndex + 1);
-      }
+      // console.log("hahahahhahha");
+      setCurrentIndex(currentIndex);
+    } else {
+      setCurrentIndex(currentIndex + 1);
+    }
   }
   // console.log("rrrrr",);
   return (
@@ -376,25 +366,25 @@ const FilterProduct = ({ onAdd }) => {
         <div className="filter">
           {listBrand.map((item, index) => {
             return (
-              <div className="filter-item" key={index}>
-                <label htmlFor="checkbox">
-                  <input
-                    value={item.name}
-                    autoFocus={true}
-                    type="checkbox"
-                    id="checkbox"
-                    checked={
-                      item.name === "Tất cả" && checked.length === 0
-                        ? true
-                        : checked.includes(item.name)
-                    }
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                  />
-                </label>
-                <span>{item.name}</span>
-              </div>
+                <div className="filter-item" key={index}>
+                  <label htmlFor="checkbox">
+                    <input
+                      value={item.name}
+                      autoFocus={true}
+                      type="checkbox"
+                      id="checkbox"
+                      checked={
+                        item.name === "Tất cả" && checked.length === 0
+                          ? true
+                          : checked.includes(item.name)
+                      }
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                    />
+                  </label>
+                  <span>{item.name}</span>
+                </div>
             );
           })}
         </div>
@@ -405,29 +395,39 @@ const FilterProduct = ({ onAdd }) => {
         )}
         <div className="list-product-page">
           <div className="list-product">
-            {listData
-              ?.slice(currentIndex * limit, (currentIndex + 1) * limit)
-              .map((item) => {
-                return (
-                  <ProductItem listData={item} key={item._id} onAdd={onAdd} />
-                );
-              })}
+            {listData.map((item) => {
+              return (
+                <ProductItem listData={item} key={item._id} onAdd={onAdd} />
+              );
+            })}
           </div>
           <div className="pagination">
-            <button className="btn-prev" disabled={currentIndex === 0} onClick={handlePrev}><FontAwesomeIcon icon={faAngleLeft} /></button>
-          {range(totalPage).map((item, index) => {
-            return (
-              <span
-                onClick={() => {
-                  handleChangeIndex(index);
-                }}
-                className={`page ${currentIndex === index ? "active-pagination" : ""}`}
-              >
-                {index + 1}
-              </span>
-            );
-          })}
-          <button className="btn-next" disabled={currentIndex === totalPage - 1} onClick={handleNext}><FontAwesomeIcon icon={faAngleRight} /></button>
+            {(currentIndex === 1)
+              ? <button className="btn-prev" disabled={currentIndex === 1} onClick={handlePrev}><FontAwesomeIcon icon={faAngleLeft} /></button>
+              : (<Link to={`?page=${currentIndex + 1}`}>
+                <button className="btn-prev" disabled={currentIndex === 1} onClick={handlePrev}><FontAwesomeIcon icon={faAngleLeft} /></button>
+              </Link>)
+            }
+            {range(totalPage).map((item, index) => {
+              return (
+                <Link to={`?page=${index + 1}`}>
+                  <span
+                    onClick={() => {
+                      handleChangeIndex(index);
+                    }}
+                    className={`page ${currentIndex === (index + 1) ? "active-pagination" : ""}`}
+                  >
+                    {index + 1}
+                  </span>
+                </Link>
+              );
+            })}
+            {(currentIndex === Number(totalPage))
+              ? <button className="btn-next" disabled={currentIndex === totalPage} onClick={handleNext}><FontAwesomeIcon icon={faAngleRight} /></button>
+              : (<Link to={`?page=${currentIndex + 1}`}>
+                <button className="btn-next" disabled={currentIndex === totalPage} onClick={handleNext}><FontAwesomeIcon icon={faAngleRight} /></button>
+              </Link>)
+            }
           </div>
         </div>
       </div>
