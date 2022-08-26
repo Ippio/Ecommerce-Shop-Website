@@ -316,6 +316,7 @@ const FilterProduct = ({ onAdd }) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
+    setCurrentIndex(1)
     if (value === "Tất cả") setChecked([]);
     else {
       if (!checked.includes(value)) setChecked([...checked, e.target.value]);
@@ -404,13 +405,12 @@ const FilterProduct = ({ onAdd }) => {
           <div className="pagination">
             {(currentIndex === 1)
               ? <button className="btn-prev" disabled={currentIndex === 1} onClick={handlePrev}><FontAwesomeIcon icon={faAngleLeft} /></button>
-              : (<Link to={`?page=${currentIndex + 1}`}>
+              : (
                 <button className="btn-prev" disabled={currentIndex === 1} onClick={handlePrev}><FontAwesomeIcon icon={faAngleLeft} /></button>
-              </Link>)
+              )
             }
             {range(totalPage).map((item, index) => {
               return (
-                <Link to={`?page=${index + 1}`}>
                   <span
                     onClick={() => {
                       handleChangeIndex(index);
@@ -419,14 +419,13 @@ const FilterProduct = ({ onAdd }) => {
                   >
                     {index + 1}
                   </span>
-                </Link>
               );
             })}
             {(currentIndex === Number(totalPage))
               ? <button className="btn-next" disabled={currentIndex === totalPage} onClick={handleNext}><FontAwesomeIcon icon={faAngleRight} /></button>
-              : (<Link to={`?page=${currentIndex + 1}`}>
+              : (
                 <button className="btn-next" disabled={currentIndex === totalPage} onClick={handleNext}><FontAwesomeIcon icon={faAngleRight} /></button>
-              </Link>)
+              )
             }
           </div>
         </div>
