@@ -16,7 +16,7 @@ function App() {
     if (exist) {
       // alert("Thêm sản phẩm vào giỏ hàng thành công <3");
 
-        setCartItems(
+      setCartItems(
         cartItems.map((x) => {
           return (x._id === product._id && product.amount < product.quantity) ? { ...exist, amount: exist.amount + 1 } : x;
         })
@@ -54,8 +54,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
+          <Route exact path="/" element={<Home />} />
+          <Route  path="/search/:key" element={<Search onAdd={onAdd} />} />
+          <Route  path="/search/" element={<Search onAdd={onAdd} />} />
+          <Route 
             path="/:productType"
             element={<Category onAdd={onAdd} onRemove={onRemove} />}
           />
@@ -70,8 +72,7 @@ function App() {
               />
             }
           />
-          <Route path="/product/:productId" element={<Detail onAdd={onAdd}/>} />
-          <Route path="/search/:key" element={<Search onAdd={onAdd} />} />
+          <Route path="/product/:productId" element={<Detail onAdd={onAdd} />} />
           <Route path="/pay" element={<Pay />} />
         </Routes>
       </BrowserRouter>
